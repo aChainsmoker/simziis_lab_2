@@ -8,10 +8,10 @@ from app.repositories.user_repository import UserRepository
 
 
 def current_user(request: Request, db: Session = Depends(get_db)):
-    authorization = request.headers.get("Authorization", "")
-    if not authorization.startswith("Bearer "):
+    from app.core.config import ACCESS_TOKEN_COOKIE
+    token = request.cookies.get(ACCESS_TOKEN_COOKIE)
+    if not token:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Требуется access-токен")
-    token = authorization[7:]
     if token in revoked_tokens:
         raise HTTPException(status_code=401, detail="Токен отозван")
     try:
@@ -25,8 +25,8 @@ def current_user(request: Request, db: Session = Depends(get_db)):
 
 
 def token_from_request(request: Request) -> str:
-    authorization = request.headers.get("Authorization", "")
-    if not authorization.startswith("Bearer "):
+    from app.core.config import ACCESS_TOKEN_COOKIE
+    token = request.cookies.get(ACCESS_TOKEN_COOKIE)
+    if not token:
         raise HTTPException(status_code=401, detail="Требуется access-токен")
-    return authorization[7:]
-
+    return token

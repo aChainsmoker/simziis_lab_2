@@ -14,7 +14,7 @@ uvicorn app.main:app --reload
 
 Открыть в браузере: http://127.0.0.1:8000
 
-Access-токен хранится в `localStorage` браузера и передаётся в API через `Authorization: Bearer <token>`.
+Access-токен хранится в HttpOnly cookie и автоматически отправляется браузером с запросами. JavaScript не имеет доступа к значению токена.
 
 Настройки приложения загружаются из файла `.env` в корне проекта `lab2`.
 
