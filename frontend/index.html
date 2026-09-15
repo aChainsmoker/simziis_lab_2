@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secure Data</title><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="container">
+  <section id="auth-section" class="card auth-card">
+    <h2>Авторизация</h2>
+    <input id="username" placeholder="Имя пользователя" required>
+    <input id="password" type="password" placeholder="Пароль" required>
+    <div><button onclick="register()">Регистрация</button><button onclick="login()">Войти</button></div>
+  </section>
+  <section id="app-section" hidden>
+    <header class="toolbar"><span id="current-user"></span><button onclick="logout()">Выйти</button></header>
+    <nav class="tabs">
+      <button id="tab-public" class="tab active" onclick="selectTab('public-data')">Неконфиденциальные данные</button>
+      <button id="tab-confidential" class="tab" onclick="selectTab('confidential')">Конфиденциальные данные</button>
+    </nav>
+    <section class="card data-panel">
+      <div class="panel-header"><h2 id="panel-title">Неконфиденциальные данные</h2><button onclick="addRecord()">Добавить</button></div>
+      <input id="search" placeholder="Поиск" oninput="loadData()">
+      <div id="records"></div>
+    </section>
+  </section>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>
