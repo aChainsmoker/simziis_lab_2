@@ -3,4 +3,4 @@ __pycache__/
 .env
 task/
 *_images/
-*_review/
+*_review*/
